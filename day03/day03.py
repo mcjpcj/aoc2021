@@ -14,17 +14,22 @@ def find_rating(data, co2):
         count = stats.mode(data[:,col])[1][0]
         if co2:
             mode = not mode
-        if count == data.shape[0] - count and co2:
-            mode = 0
-        if count == data.shape[0] - count and not co2:
-            mode = 1
-        return data[data[:,col] == mode, :]
+        if count == data.shape[0] - count:
+            if co2:
+                mode = 0
+            else:
+                mode = 1
+        return data[data[:,col] == mode,:]
         
     for i in range(data.shape[1]):
         data = eliminate(data, i) 
-        if data.shape == (1, 12):
+        if data.shape[0] == 1:
             return data[0]
             
 oxygen_ratings = "".join(map(str,  find_rating(data, co2=False)))
 co2_ratings = "".join(map(str,  find_rating(data, co2=True)))
 print(int(oxygen_ratings, base=2) * int(co2_ratings, base=2))
+
+def bin_reversy(binnum):
+    return binnum ^ "0xFFFF"
+
