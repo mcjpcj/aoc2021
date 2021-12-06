@@ -1,9 +1,10 @@
 import numpy as np
 
-lanterfishes = np.genfromtxt("input.txt", delimiter=",", dtype=int)
+
 # Part one
+lanterfishes = np.genfromtxt("input.txt", delimiter=",", dtype=int)
 duration = 80
-for day in range(0, 80):
+for day in range(0, duration):
     lanterfishes = lanterfishes - 1
     new_lanterfishes = np.array([8] * np.count_nonzero(lanterfishes == -1), dtype=int)
     lanterfishes = np.append(lanterfishes, new_lanterfishes)
@@ -14,9 +15,8 @@ lanterfishes = np.genfromtxt("input.txt", delimiter=",", dtype=int)
 duration = 256
 memory = {}
 
-
 def population_count(day, first_gen=False):
-    global memory
+    global memory, duration
     try:
         return memory[day]
     except KeyError:
@@ -29,7 +29,6 @@ def population_count(day, first_gen=False):
             count += population_count(birth)
         memory[day] = count
         return count
-
 
 print(
     np.sum(list(map(lambda x: population_count(x, first_gen=True), lanterfishes)))
