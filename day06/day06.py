@@ -15,6 +15,7 @@ lanterfishes = np.genfromtxt("input.txt", delimiter=",", dtype=int)
 duration = 256
 memory = {}
 
+
 def population_count(day, first_gen=False):
     global memory, duration
     try:
@@ -29,6 +30,7 @@ def population_count(day, first_gen=False):
             count += population_count(birth)
         memory[day] = count
         return count
+
 
 print(
     np.sum(list(map(lambda x: population_count(x, first_gen=True), lanterfishes)))

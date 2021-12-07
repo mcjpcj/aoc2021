@@ -31,7 +31,3 @@ def find_rating(data, co2):
 oxygen_ratings = "".join(map(str, find_rating(data, co2=False)))
 co2_ratings = "".join(map(str, find_rating(data, co2=True)))
 print(int(oxygen_ratings, base=2) * int(co2_ratings, base=2))
-
-
-def bin_reversy(binnum):
-    return binnum ^ "0xFFFF"
