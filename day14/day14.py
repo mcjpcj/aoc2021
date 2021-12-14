@@ -1,4 +1,4 @@
-def prepare_date(file_name):
+def prepare_data(file_name):
     with open(file_name, "r") as file:
         start_template, insertion_rules = file.read().split("\n\n")
         insertion_rules = {
@@ -28,14 +28,14 @@ def polymer_insert_part_two(pairs):
 
 
 # Part one:
-template, insertion_rules = prepare_date("input.txt")
+template, insertion_rules = prepare_data("input.txt")
 for _ in range(10):
     template = polymer_insert_part_one(template, insertion_rules)
 element_count = {element: template.count(element) for element in set(template)}
 print(max(element_count.values()) - min(element_count.values()))
 
 # Part two:
-template, insertion_rules = prepare_date("input.txt")
+template, insertion_rules = prepare_data("input.txt")
 beg_pairs = [template[i : i + 2] for i in range(len(template) - 1)]
 insertions = {
     rule: [rule[0] + insertion_rules[rule], insertion_rules[rule] + rule[1]]
