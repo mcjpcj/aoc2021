@@ -6,38 +6,47 @@ class Cave:
             self.type = "BIG"
         else:
             self.type = "SMALL"
-            
+
     def add_connection(self, con):
         self.connected.append(con)
-        
+
+
 class Path:
     def __init__(self, map=["start"]):
         self.map = map
-        
+
     def check_if_can_go(self, new_cave):
         if new_cave in self.map and new_cave.type != "BIG":
             return False
         else:
             return True
- 
+
     def check_if_visited_small_cave_twice(self):
         small_caves = [cave for cave in self.map if cave.islower()]
         return len(small_caves) == len(set(small_caves))
-            
+
     def possible_caves_part_one(self):
-        return [cave for cave in caves[self.map[-1]].connected if cave not in self.map or caves[cave].type == "BIG"]
-    
+        return [
+            cave
+            for cave in caves[self.map[-1]].connected
+            if cave not in self.map or caves[cave].type == "BIG"
+        ]
+
     def possible_caves_part_two(self):
         if self.check_if_visited_small_cave_twice():
-            return [cave for cave in caves[self.map[-1]].connected 
-            if cave != "start"
-            and self.map.count(cave) < 2 
-            or caves[cave].type == "BIG"]   
+            return [
+                cave
+                for cave in caves[self.map[-1]].connected
+                if cave != "start"
+                and self.map.count(cave) < 2
+                or caves[cave].type == "BIG"
+            ]
         else:
             return self.possible_caves_part_one()
-                             
+
+
 with open("input.txt", "r") as file:
-    data = file.read().splitlines()    
+    data = file.read().splitlines()
 caves = {}
 for line in data:
     beg, end = line.split("-")
@@ -46,7 +55,7 @@ for line in data:
     except KeyError:
         caves[beg] = Cave(beg)
         caves[beg].add_connection(end)
-        
+
     try:
         caves[end].add_connection(beg)
     except KeyError:

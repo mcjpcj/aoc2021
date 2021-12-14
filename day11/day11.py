@@ -1,17 +1,23 @@
 import numpy as np
 
+
 def find_adjacent(cell, grid):
     x0, y0 = cell
     adjacent_cells = []
     for row in range(-1, 2):
-        for col in range(-1, 2):              
+        for col in range(-1, 2):
             adjacent_cells.append([x0 + row, y0 + col])
 
-    adjacent_cells = [[x, y] for [x, y] in adjacent_cells 
-    if x in range(grid.shape[0]) 
-    and y in range(grid.shape[1])
-    and (x, y) != (x0, y0)]
-    return adjacent_cells 
+    adjacent_cells = [
+        [x, y]
+        for [x, y] in adjacent_cells
+        if x in range(grid.shape[0])
+        and y in range(grid.shape[1])
+        and (x, y) != (x0, y0)
+    ]
+    return adjacent_cells
+
+
 # Part one
 with open("input.txt", "r") as file:
     data = [list(line) for line in file.read().splitlines()]
@@ -38,7 +44,7 @@ print(flash_count)
 with open("input.txt", "r") as file:
     data = [list(line) for line in file.read().splitlines()]
     data = np.array(data, dtype=int)
-    
+
 step = 0
 while True:
     step += 1
