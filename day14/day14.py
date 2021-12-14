@@ -16,14 +16,14 @@ def polymer_insert_part_one(template, rules):
 def polymer_insert_part_two(pairs):
     new_pairs = {pair: 0 for pair in insertion_rules.keys()}
     element_count = {element: 0 for element in set(insertion_rules.values())}
+    element_count[template[0]]
     for pair, count in pairs.items():
         if count > 0:
-            new_pair1, new_pair2 = insertions[pair]
-            new_pairs[new_pair1] += count
-            new_pairs[new_pair2] += count
-            element_count[new_pair1[0]] += count
-            element_count[new_pair1[1]] += count
-    element_count[template[-1]] += 1
+            pair1, pair2 = insertions[pair]
+            new_pairs[pair1] += count
+            new_pairs[pair2] += count
+            element_count[pair2[0]] += count
+            element_count[pair2[1]] += count
     return new_pairs, element_count
 
 

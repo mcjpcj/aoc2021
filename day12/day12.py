@@ -11,7 +11,7 @@ class Cave:
         self.connected.append(con)
 
 
-class Path:
+class CavePath:
     def __init__(self, map=["start"]):
         self.map = map
 
@@ -63,7 +63,7 @@ for line in data:
         caves[end].add_connection(beg)
 
 # Part one
-paths = [Path()]
+paths = [CavePath()]
 finished = []
 i = 0
 while paths != []:
@@ -73,19 +73,18 @@ while paths != []:
         if cave == "end":
             finished.append(map)
         else:
-            paths.append(Path(map))
+            paths.append(CavePath(map))
 print(len(finished))
 # Part two
-paths = [Path()]
+paths = [CavePath()]
 finished = []
 i = 0
 while paths != []:
     path = paths.pop()
-    # print(path.map, path.possible_caves_part_two())
     for cave in path.possible_caves_part_two():
         map = path.map.copy() + [cave]
         if cave == "end":
             finished.append(map)
         else:
-            paths.append(Path(map))
+            paths.append(CavePath(map))
 print(len(finished))
